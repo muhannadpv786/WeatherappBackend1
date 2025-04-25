@@ -4,7 +4,7 @@ pipeline {
     environment {
         // Git settings
         GIT_CREDENTIALS_ID = 'Git'
-        GIT_REPO_URL = 'git@github.com:AaradhyaBodade1/WeatherappFrontend.git'
+        GIT_REPO_URL = 'git@github.com:AaradhyaBodade1/WeatherappBackend1.git'
         GIT_BRANCH = 'main'
 
         // AWS + EKS
@@ -12,14 +12,16 @@ pipeline {
         AWS_CREDS_ID = 'aws-secret-key'
 
         // ECR & EKS Deployments
-        ECR_REPO_URI = '650089658128.dkr.ecr.ap-south-1.amazonaws.com/frontend'
+        ECR_REPO_URI = '650089658128.dkr.ecr.ap-south-1.amazonaws.com/backend1'
         CLUSTER_NAME = 'eks-cluster'
-        DEPLOYMENT_NAME = 'frontend'
+        DEPLOYMENT_NAME = 'getweatherservice'
 
         // Docker
+        
         DOCKERFILE_DIR = '.'
         IMAGE_TAG = "${BUILD_NUMBER}"
         DOCKER_IMAGE_TAG = "${ECR_REPO_URI}:${IMAGE_TAG}"
+        ns = 'backend-services'
 
         // Email
         EMAIL_RECIPIENTS = 'aaradhyabodade255@gmail.com'
@@ -90,12 +92,13 @@ pipeline {
                 withCredentials([[ $class: 'AmazonWebServicesCredentialsBinding', credentialsId: "${AWS_CREDS_ID}" ]]) {
                     sh """
                         aws eks update-kubeconfig --name ${CLUSTER_NAME} --region ${REGION}
-                        kubectl set image deployment/${DEPLOYMENT_NAME} ${DEPLOYMENT_NAME}=${DOCKER_IMAGE_TAG}
+                        kubectl set image deployment/${DEPLOYMENT_NAME} ${DEPLOYMENT_NAME}=${DOCKER_IMAGE_TAG} -n ${ns}
                     """
                 }
             }
         }
     }
+    
 
     
 post {
