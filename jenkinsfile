@@ -24,7 +24,7 @@ pipeline {
         ns = 'backend-services'
 
         // Email
-        EMAIL_RECIPIENTS = 'aaradhyabodade255@gmail.com'
+        EMAIL_RECIPIENTS = 'munnupv@gmail.com'
     }
 
     stages {
