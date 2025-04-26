@@ -12,8 +12,8 @@ pipeline {
         AWS_CREDS_ID = 'aws-secret-key'
 
         // ECR & EKS Deployments
-        ECR_REPO_URI = '650089658128.dkr.ecr.ap-south-1.amazonaws.com/backend1'
-        CLUSTER_NAME = 'eks-cluster'
+        ECR_REPO_URI = '279707218273.dkr.ecr.ap-south-1.amazonaws.com/backend1'
+        CLUSTER_NAME = 'muhannad-cluster'
         DEPLOYMENT_NAME = 'getweatherservice'
 
         // Docker
